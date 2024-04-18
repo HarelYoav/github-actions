@@ -1,0 +1,15 @@
+name: jfrgo-cli-docker-push
+
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: JFrog-CLI
+        uses: jfrog/setup-jfrog-cli@v4
+      - run: jf --version
