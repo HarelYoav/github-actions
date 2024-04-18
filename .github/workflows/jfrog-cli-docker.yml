@@ -26,9 +26,14 @@ jobs:
           username: ${{ secrets.JF_USER }}
           password: ${{ secrets.JF_ACCESS_TOKEN }}
 
-      - name: Run JFrog CLI
+      - name: Build Docker image with JFrog CLI
         run: |
           # Ping the server
           jf rt ping
           jf docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test .
+          
+      - name: Push Docker image
+        run: |
+          jf docker login ${{ secrets.JF_BASE_URL }} --username ${{ secrets.JF_USER }} --password ${{ secrets.JF_ACCESS_TOKEN }}
           jf docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+        
