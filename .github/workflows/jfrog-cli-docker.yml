@@ -12,4 +12,6 @@ jobs:
         uses: actions/checkout@v4
       - name: JFrog-CLI
         uses: jfrog/setup-jfrog-cli@v4
+        with:
+          version: latest
       - run: jf --version
