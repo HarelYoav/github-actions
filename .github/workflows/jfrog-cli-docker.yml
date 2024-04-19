@@ -36,4 +36,5 @@ jobs:
         run: |
           jf docker login ${{ secrets.JF_BASE_URL }} --username ${{ secrets.JF_USER }} --password ${{ secrets.JF_ACCESS_TOKEN }}
           jf docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+          jf rt bp
         
