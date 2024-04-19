@@ -23,7 +23,7 @@ jobs:
       - name: NPM config
         run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
       - name: NPM install
-        run: jf npm ci
+        run: jf npm i
       - name: NPM publish
         run: jf npm publish
       - name: Publish build-info
