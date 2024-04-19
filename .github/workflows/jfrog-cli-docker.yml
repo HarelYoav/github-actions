@@ -20,6 +20,12 @@ jobs:
       - name: Push Docker image
         run: |
           jf docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+      - name: NPM config
+        run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
+      - name: NPM install
+        run: jf npm ci
+      - name: NPM publish
+        run: jf npm publish
       - name: Publish build-info
         run: jf rt bp
         
