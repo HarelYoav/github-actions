@@ -16,16 +16,22 @@ jobs:
           JF_URL: ${{ secrets.JF_URL }}
           # JFrog Platform access token
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-      - name: Build Docker image
-        run: jf docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test . 
-      - name: Push Docker image
-        run: jf docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
-      - name: NPM config
-        run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
-      - name: NPM install
-        run: jf npm i
-      - name: NPM publish
-        run: jf npm publish
-      - name: Publish build-info
-        run: jf rt bp
+      - name: build
+        run: docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test .
+      - name: login
+        run: docker login ${{secrets.JF_BASE_URL }} --username yoavh --password ${{ secrets.JF_ACCESS_TOKEN }}
+      - name: push
+        run: docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+      # - name: Build Docker image
+      #   run: jf docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test . 
+      # - name: Push Docker image
+      #   run: jf docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+      # - name: NPM config
+      #   run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
+      # - name: NPM install
+      #   run: jf npm i
+      # - name: NPM publish
+      #   run: jf npm publish
+      # - name: Publish build-info
+      #   run: jf rt bp
         
