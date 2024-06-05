@@ -8,30 +8,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v4
-        with:
-            version: latest
+      #   uses: jfrog/setup-jfrog-cli@v4
+      #   with:
+      #       version: latest
+      #   env:
+      #     # JFrog platform url (for example: https://acme.jfrog.io)
+      #     JF_URL: ${{ secrets.JF_URL }}
+      #     # JFrog Platform access token
+      #     JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+      # - name: build
+      #   run: docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test .
+      # - name: login
+      #   run: docker login ${{secrets.JF_BASE_URL }} --username yoavh --password ${{ secrets.JF_ACCESS_TOKEN }}
+      # - name: push
+        # run: docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+      - uses: jfrog/setup-jfrog-cli@v3
         env:
-          # JFrog platform url (for example: https://acme.jfrog.io)
-          JF_URL: ${{ secrets.JF_URL }}
-          # JFrog Platform access token
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-      - name: build
-        run: docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test .
-      - name: login
-        run: docker login ${{secrets.JF_BASE_URL }} --username yoavh --password ${{ secrets.JF_ACCESS_TOKEN }}
-      - name: push
-        run: docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
+          JF_URL: https://elinaf.jfrog.io
+        with:
+          oidc-provider-name: yoavh-github 
+          oidc-audience: support
       # - name: Build Docker image
       #   run: jf docker build -t ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test . 
       # - name: Push Docker image
       #   run: jf docker push ${{ secrets.JF_BASE_URL }}/yoavh-docker-local/github-test
-      # - name: NPM config
-      #   run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
-      # - name: NPM install
-      #   run: jf npm i
-      # - name: NPM publish
-      #   run: jf npm publish
-      # - name: Publish build-info
-      #   run: jf rt bp
+      - name: NPM config
+        run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
+      - name: NPM install
+        run: jf npm i
+      - name: NPM publish
+        run: jf npm publish
+      - name: Publish build-info
+        run: jf rt bp
         
