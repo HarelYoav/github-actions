@@ -6,14 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 
       - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v3
-          env:
-            JF_URL: ${{ secrets.JF_URL }}
-          with:
-            oidc-provider-name: yoavh-github 
-            oidc-audience: support
+      - uses: jfrog/setup-jfrog-cli@v3
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+        with:
+          oidc-provider-name: yoavh-github 
+          oidc-audience: support
       - name: NPM config
         run: jf npmc --repo-resolve yoavh-npm --repo-deploy yoavh-npm
       - name: NPM install
@@ -24,7 +24,7 @@ jobs:
         run: jf rt bp
 
 
-              #   uses: jfrog/setup-jfrog-cli@v4
+      #   uses: jfrog/setup-jfrog-cli@v4
       #   with:
       #       version: latest
       #   env:
